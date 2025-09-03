@@ -22,12 +22,14 @@ public class GamePanel extends JPanel implements Runnable{
 	final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 	
 	Thread gameThread;
+	KeyHandler keyH = new KeyHandler();
 	
-	public GamePanel() {
+	public GamePanel() {		
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
+		this.addKeyListener(keyH);
 		
 	}
 	
