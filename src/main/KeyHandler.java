@@ -9,8 +9,7 @@ public class KeyHandler implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+				
 	}
 
 	@Override
@@ -19,10 +18,7 @@ public class KeyHandler implements KeyListener{
 		int code = e.getKeyCode();
 		
 		if(code == KeyEvent.VK_UP) {
-			upPressed = true;
-			
-			System.out.println("Tecla pressionada"); 
-			
+			upPressed = true;					
 		}
 		if(code == KeyEvent.VK_DOWN) {
 			downPressed = true;					
@@ -42,10 +38,7 @@ public class KeyHandler implements KeyListener{
 		int code = e.getKeyCode();
 		
 		if(code == KeyEvent.VK_UP) {
-			upPressed = false;
-			
-			System.out.println("Tecla livre");
-			
+			upPressed = false;				
 		}
 		if(code == KeyEvent.VK_DOWN) {
 			downPressed = false;					
