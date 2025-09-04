@@ -20,6 +20,9 @@ public class KeyHandler implements KeyListener{
 		
 		if(code == KeyEvent.VK_UP) {
 			upPressed = true;
+			
+			System.out.println("Tecla pressionada"); 
+			
 		}
 		if(code == KeyEvent.VK_DOWN) {
 			downPressed = true;					
@@ -40,6 +43,9 @@ public class KeyHandler implements KeyListener{
 		
 		if(code == KeyEvent.VK_UP) {
 			upPressed = false;
+			
+			System.out.println("Tecla livre");
+			
 		}
 		if(code == KeyEvent.VK_DOWN) {
 			downPressed = false;					
