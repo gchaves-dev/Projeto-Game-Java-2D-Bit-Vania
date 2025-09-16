@@ -29,6 +29,8 @@ public class Player extends Entity{
 		solidArea = new Rectangle();
 		solidArea.x = 8;
 		solidArea.y = 16;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 		solidArea.width = 32;
 		solidArea.height = 32;
 		
@@ -88,6 +90,9 @@ public void update() {
 			//CHECK TILE COLLISION			
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
+			
+			// CHECK OBJECT COLLISION
+			int objectIndex = gp.cChecker.checkObect(this, true);
 			
 			//IF COLLISION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
