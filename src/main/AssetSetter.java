@@ -1,4 +1,4 @@
-package main;
+ package main;
 
 import object.OBJ_Boot;
 import object.OBJ_Chest;
@@ -17,20 +17,24 @@ public class AssetSetter {
 	public void setObject() {
 		
 		gp.obj[0] = new OBJ_Key(); 
-		gp.obj[0].worldX = 21 * gp.tileSize;
-		gp.obj[0].worldY = 14 * gp.tileSize;		
+		gp.obj[0].worldX = 31 * gp.tileSize;
+		gp.obj[0].worldY = 5 * gp.tileSize;	
 		
-		gp.obj[1] = new OBJ_Door(); 
-		gp.obj[1].worldX = 9 * gp.tileSize;
-		gp.obj[1].worldY = 11 * gp.tileSize;
+		gp.obj[1] = new OBJ_Key(); 
+		gp.obj[1].worldX = 21 * gp.tileSize;
+		gp.obj[1].worldY = 12 * gp.tileSize;
 		
-		gp.obj[2] = new OBJ_Chest(); 
+		gp.obj[2] = new OBJ_Door(); 
 		gp.obj[2].worldX = 9 * gp.tileSize;
-		gp.obj[2].worldY = 8 * gp.tileSize;
+		gp.obj[2].worldY = 11 * gp.tileSize;
 		
-		gp.obj[3] = new OBJ_Boot(); 
-		gp.obj[3].worldX = 45 * gp.tileSize;
-		gp.obj[3].worldY = 45 * gp.tileSize;
+		gp.obj[3] = new OBJ_Chest(); 
+		gp.obj[3].worldX = 9 * gp.tileSize;
+		gp.obj[3].worldY = 8 * gp.tileSize;
+		
+		gp.obj[4] = new OBJ_Boot(); 
+		gp.obj[4].worldX = 45 * gp.tileSize;
+		gp.obj[4].worldY = 45 * gp.tileSize;
 		
 		
 	}

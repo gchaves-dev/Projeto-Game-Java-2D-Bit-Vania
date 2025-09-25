@@ -18,6 +18,8 @@ public class Player extends Entity{
 	public final int screenX;
 	public final int screenY;
 	
+	int hasKey = 0;
+	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
 		this.gp = gp;
@@ -41,8 +43,8 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		worldX = gp.tileSize * 10;
-		worldY = gp.tileSize * 9;
+		worldX = gp.tileSize * 31;
+		worldY = gp.tileSize * 24;
 		speed = 4;
 		direction = "down";
 		
@@ -66,7 +68,7 @@ public class Player extends Entity{
 		
 	}
 	
-public void update() {
+	public void update() {
 		
 		if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {			
 					
@@ -92,7 +94,9 @@ public void update() {
 			gp.cChecker.checkTile(this);
 			
 			// CHECK OBJECT COLLISION
-			int objectIndex = gp.cChecker.checkObect(this, true);
+			int objIndex = gp.cChecker.checkObect(this, true);
+			
+			pickUpObject(objIndex);
 			
 			//IF COLLISION IS FALSE, PLAYER CAN MOVE
 			if(collisionOn == false) {
@@ -125,6 +129,31 @@ public void update() {
 				spriteCounter = 0;
 			}
 		}	
+	}
+	
+	public void pickUpObject(int i) {
+		
+		if(i != 999) {
+			
+			String objectName = gp.obj[i].name;
+			
+			switch(objectName) {
+			case "Key":
+				hasKey ++;
+				gp.obj[i] = null;
+				System.out.println("Key: "+ hasKey);
+				break;
+			case "Door":
+				if(hasKey > 0) {
+					gp.obj[i] = null;
+					hasKey --;					
+				}
+				System.out.println("Key: "+ hasKey);
+				break;
+			}
+			
+		}
+		
 	}
 	
 	public void draw(Graphics2D g2) {

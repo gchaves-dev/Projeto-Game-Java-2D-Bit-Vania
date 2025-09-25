@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// SCREEN SETTINGS
 	final int originalTileSize = 16; // 16x16 pixels
-	final int scale = 4;
+	final int scale = 3;
 
 	public final int tileSize = originalTileSize * scale; // 48x48 pixels
 	public final int maxScreenCol = 16;
@@ -91,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 			
 			if (timer >= 1000000000) {
-				System.out.println("FPS:" + drawCount);
+				//System.out.println("FPS:" + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
