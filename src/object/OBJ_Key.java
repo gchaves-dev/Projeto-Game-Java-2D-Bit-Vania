@@ -1,21 +1,15 @@
 package object;
 
-import java.io.IOException;
+import main.GamePanel;
 
-import javax.imageio.ImageIO;
+public class OBJ_Key extends SuperObject {
 
-public class OBJ_Key extends SuperObject{
-	
-	public OBJ_Key() {
-		
-		name = "Key";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+    public OBJ_Key() {
 
+        name = "Key";
+        
+        image = GamePanel.spriteSheetObject.getSprite(16, 0, 16, 16);
+
+        collision = false;
+    }
 }

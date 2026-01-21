@@ -4,20 +4,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.GamePanel;
+
 public class OBJ_Door extends SuperObject{
 	
 	public OBJ_Door() {
 		
 		name = "Door";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/door.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		collision = true;
 		
+		image = GamePanel.spriteSheetObject.getSprite(0, 0, 16, 16);
 		
+		collision = true;		
 	}
-
 }

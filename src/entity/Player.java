@@ -4,7 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import graphics.Sprite;
+
+import graphics.SpriteSheetPlayer;
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -19,7 +20,7 @@ public class Player extends Entity {
     public int right_dir = 0, left_dir = 1;    
     public int lastDir = right_dir;
 
-    public Sprite sprite;
+    public SpriteSheetPlayer sprite;
 
     private BufferedImage[] rightPlayer;
     private BufferedImage[] leftPlayer;
@@ -34,7 +35,7 @@ public class Player extends Entity {
         this.gp = gp;
         this.keyH = keyH;
 
-        sprite = new Sprite("/player/playerAnimation.png");
+        sprite = new SpriteSheetPlayer("/player/playerAnimation.png");
 
         rightPlayer = new BufferedImage[4];
         leftPlayer = new BufferedImage[4];
@@ -57,17 +58,17 @@ public class Player extends Entity {
         solidArea.height = gp.tileSize / 2;
         
         solidAreaDefaultX = solidArea.x;
-        solidAreaDefaultY = solidArea.y;
-        
+        solidAreaDefaultY = solidArea.y;        
 
         this.setDefaultValues();
+        
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 31;
+        worldX = gp.tileSize * 25;
         worldY = gp.tileSize * 24;
         speed = 3;
-        direction = "left";
+        direction = "right";
     }
 
     public void update() {
@@ -98,30 +99,23 @@ public class Player extends Entity {
             direction = "right";
             moved = true;
             lastDir = right_dir; 
-        }
+        }        
         
         collisionOn = false;
-        gp.cChecker.checkTile(this);
         int objIndex = gp.cChecker.checkObect(this, true);
         pickUpObject(objIndex);
         
+        gp.cChecker.checkTile(this, moveX, 0);
         if (!collisionOn) {
-
-            collisionOn = false;
-            int oldWorldX = worldX;
             worldX += moveX;
-            gp.cChecker.checkTile(this);
-            if (collisionOn) {
-                worldX = oldWorldX;
-            }
+        }
+        
+        collisionOn = false;
+        gp.cChecker.checkObect(this, true);
 
-            collisionOn = false;
-            int oldWorldY = worldY;
+        gp.cChecker.checkTile(this, 0, moveY);
+        if (!collisionOn) {
             worldY += moveY;
-            gp.cChecker.checkTile(this);
-            if (collisionOn) {
-                worldY = oldWorldY;
-            }
         }
         
         if (moved) {

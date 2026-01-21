@@ -4,18 +4,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.GamePanel;
+
 public class OBJ_Boot extends SuperObject{
 
-public OBJ_Boot() {	
+	public OBJ_Boot() {	
 	
-	name = "Boot";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/boot.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		name = "Boot";
+	
+		image = GamePanel.spriteSheetObject.getSprite(48, 0, 16, 16);
+	
+		collision = false;		
 	}
-
 }
