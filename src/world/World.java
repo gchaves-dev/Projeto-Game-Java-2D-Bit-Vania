@@ -1,13 +1,14 @@
-
 package world;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import graphics.SpriteSheetTile;
+import entity.Player;
 import main.GamePanel;
 
 public class World {
@@ -58,7 +59,8 @@ public class World {
 			return new TileFloor(x, y, Tile.TILE_SAND);
 		case 0xFF006b33:
 			return new TileWall(x, y, Tile.TILE_TREE);
-		
+		case 0xFF888888:
+			return new TileTall(x, y, Tile.TILE_TALL);
 		}
 		return new TileFloor(x, y, Tile.TILE_GRASS);
 	}
@@ -72,19 +74,38 @@ public class World {
 		return t.collision;
 	}
 
-	public void draw(Graphics2D g2, GamePanel gp) {
+	public void renderComPlayer(Graphics2D g2, Player player) {
 
-		int xStart = 0;
-		int yStart = 0;
-		int xEnd = WIDTH;
-		int yEnd = HEIGHT;
+		List<TileTall> tallList = new ArrayList<>();
 
-		for (int x = xStart; x < xEnd; x++) {
-			for (int y = yStart; y < yEnd; y++) {
+		for (int i = 0; i < tiles.length; i++) {
+			Tile t = tiles[i];
 
-				Tile t = tiles[x + (y * WIDTH)];
-				t.draw(g2, gp);
+			if (t instanceof TileTall) {
+				tallList.add((TileTall) t);
+			} else {
+				t.draw(g2, player);
 			}
 		}
+
+		tallList.sort((a, b) -> Integer.compare(a.y + a.getHeight(), b.y + b.getHeight()));
+
+		int playerBaseY = player.worldY + 14 + player.solidArea.y + player.solidArea.height;
+
+		for (TileTall tile : tallList) {
+			int tileBaseY = tile.y + tile.getHeight();
+
+			if (playerBaseY < tileBaseY) {
+				player.draw(g2);
+				playerBaseY = Integer.MAX_VALUE;
+			}
+
+			tile.draw(g2, player);
+		}
+
+		if (playerBaseY != Integer.MAX_VALUE) {
+			player.draw(g2);
+		}
 	}
+
 }

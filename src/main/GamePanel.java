@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
-	
+
 	public static SpriteSheetTile spriteSheetTile;
 	public static SpriteSheetPlayer spriteSheetPlayer;
 	public static SpriteSheetObject spriteSheetObject;
@@ -45,16 +45,16 @@ public class GamePanel extends JPanel implements Runnable {
 	public static Player player;
 	public CollisionChecker cChecker;
 	public AssetSetter aSetter = new AssetSetter(this);
-	public SuperObject obj[] = new SuperObject[10];	
+	public SuperObject obj[] = new SuperObject[10];
 
 	public GamePanel() {
 
-		spriteSheetTile = new SpriteSheetTile("/tile/tiles.png");	
-		spriteSheetObject = new SpriteSheetObject("/objects/objects.png");		
+		spriteSheetTile = new SpriteSheetTile("/tile/tiles.png");
+		spriteSheetObject = new SpriteSheetObject("/objects/objects.png");
 		world = new World("/map/map.png");
 		player = new Player(this, keyH);
 		cChecker = new CollisionChecker(this);
-		
+
 		maxWorldCol = World.WIDTH;
 		maxWorldRow = World.HEIGHT;
 
@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
-		this.setFocusable(true);			
+		this.setFocusable(true);
 
 	}
 
@@ -105,7 +105,7 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 
 			if (timer >= 1000000000) {
-				//System.out.println("FPS:" + drawCount);
+				// System.out.println("FPS:" + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
@@ -114,30 +114,30 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 
-		player.update();		
+		player.update();
 
 	}
 
 	public void paintComponent(Graphics g) {
-		
+
 		super.paintComponent(g);
 
 		Graphics2D g2 = (Graphics2D) g;
 
 		// WORLD
-		world.draw(g2, this);		
+		world.renderComPlayer(g2, player);
 
 		// OBJECT
 		for (int i = 0; i < obj.length; i++) {
 			if (obj[i] != null) {
 				obj[i].draw(g2, this);
+
 			}
+
 		}
-		
-		// PLAYER
-		player.draw(g2);
 
 		g2.dispose();
+
 	}
 
 }

@@ -8,9 +8,10 @@ import main.GamePanel;
 
 public class Tile {
 
+	public static BufferedImage TILE_WALL = GamePanel.spriteSheetTile.getSprite(32, 0, 16, 16);
+	public static BufferedImage TILE_TALL = GamePanel.spriteSheetTile.getSprite(48, 0, 16, 48);
 	public static BufferedImage TILE_GRASS = GamePanel.spriteSheetTile.getSprite(0, 0, 16, 16);
 	public static BufferedImage TILE_WATER = GamePanel.spriteSheetTile.getSprite(16, 0, 16, 16);
-	public static BufferedImage TILE_WALL = GamePanel.spriteSheetTile.getSprite(32, 0, 16, 16);	
 	public static BufferedImage TILE_EARTH = GamePanel.spriteSheetTile.getSprite(0, 16, 16, 16);
 	public static BufferedImage TILE_SAND = GamePanel.spriteSheetTile.getSprite(16, 16, 16, 16);
 	public static BufferedImage TILE_TREE = GamePanel.spriteSheetTile.getSprite(32, 16, 16, 16);
@@ -33,11 +34,17 @@ public class Tile {
 		return GamePanel.tileSize;
 	}
 
-	public void draw(Graphics2D g2, GamePanel gp) {
+	public void draw(Graphics2D g2, Player player) {
 
-	    int screenX = x - gp.player.worldX + gp.player.screenX;
-	    int screenY = y - gp.player.worldY + gp.player.screenY;
+		int screenX = x - player.worldX + player.screenX;
+		int screenY = y - player.worldY + player.screenY;
 
-	    g2.drawImage(sprite, screenX, screenY, GamePanel.tileSize, GamePanel.tileSize, null);
+		if (x + GamePanel.tileSize > player.worldX - player.screenX
+				&& x - GamePanel.tileSize < player.worldX + player.screenX
+				&& y + GamePanel.tileSize > player.worldY - player.screenY
+				&& y - GamePanel.tileSize < player.worldY + player.screenY) {
+
+			g2.drawImage(sprite, screenX, screenY, GamePanel.tileSize, GamePanel.tileSize, null);
+		}
 	}
 }
