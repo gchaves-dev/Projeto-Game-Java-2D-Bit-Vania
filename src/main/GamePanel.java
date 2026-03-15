@@ -12,7 +12,6 @@ import graphics.SpriteSheetObject;
 import graphics.SpriteSheetPlayer;
 import graphics.SpriteSheetTile;
 import object.SuperObject;
-import world.Tile;
 import world.World;
 
 public class GamePanel extends JPanel implements Runnable {
